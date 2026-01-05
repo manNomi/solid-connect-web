@@ -1,7 +1,5 @@
 "use client";
 
-import { toast } from "@/lib/zustand/useToastStore";
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,16 +15,16 @@ import UniversityStep from "./UniversityStep";
 
 import { ListUniversity } from "@/types/university";
 
-import usePostSubmitApplication from "@/api/applications/client/usePostSubmitApplication";
-import useGetMyGpaScore from "@/api/score/client/useGetMyGpaScore";
-import useGetMyLanguageTestScore from "@/api/score/client/useGetMyLanguageTestScore";
-import useGetUniversitySearchByText from "@/api/university/client/useGetUniversitySearchByText";
+import { useGetMyGpaScore, useGetMyLanguageTestScore } from "@/apis/Scores";
+import { usePostSubmitApplication } from "@/apis/applications";
+import { useUniversitySearch } from "@/apis/universities";
+import { toast } from "@/lib/zustand/useToastStore";
 
 const ApplyPageContent = () => {
   const router = useRouter();
   const [step, setStep] = useState<number>(1);
 
-  const { data: universityList = [] } = useGetUniversitySearchByText("");
+  const { data: universityList = [] } = useUniversitySearch("");
   const { data: gpaScoreList = [] } = useGetMyGpaScore();
   const { data: languageTestScoreList = [] } = useGetMyLanguageTestScore();
   const { mutate: postSubmitApplication } = usePostSubmitApplication({

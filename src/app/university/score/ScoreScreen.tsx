@@ -10,8 +10,7 @@ import ScoreCard from "./ScoreCard";
 
 import { languageTestMapping } from "@/types/score";
 
-import useGetMyGpaScore from "@/api/score/client/useGetMyGpaScore";
-import useGetMyLanguageTestScore from "@/api/score/client/useGetMyLanguageTestScore";
+import { useGetMyGpaScore, useGetMyLanguageTestScore } from "@/apis/Scores";
 
 const ScoreScreen = () => {
   const router = useRouter();
@@ -53,7 +52,7 @@ const ScoreScreen = () => {
             ))}
         </div>
       </div>
-      <div className="max-w-app fixed bottom-14 w-full bg-white">
+      <div className="fixed bottom-14 w-full max-w-app bg-white">
         <div className="mb-[37px] px-5">
           {curTab === "공인어학" ? (
             <BlockBtn onClick={() => router.push("/university/score/submit/language-test")}>
